@@ -67,16 +67,22 @@ HANDS_MODEL.setOptions(HAND_CONFIG);
 HANDS_MODEL.onResults(onResults);
 
 const CAMERA = new Camera(videoElement, {
-	onFrame: async () => {
-		await HANDS_MODEL.send({ image: videoElement });
-	},
-	width: CAMERA_SIZE,
-	height: CAMERA_SIZE,
-	facingMode: 'environment'
+  onFrame: async () => {
+    await HANDS_MODEL.send({ image: videoElement });
+  },
+  width: CAMERA_SIZE,
+  height: CAMERA_SIZE,
+  facingMode: "user",
 });
 CAMERA.start()
-  .then(() => addStatus(statusHolder, "Initialize Camera Feed", true))
-  .catch(() => addStatus(statusHolder, "Initialize Camera Feed", false));
+  .then(() => {
+    addStatus(statusHolder, "Initialize Camera Feed", true);
+    videoElement.play();
+  })
+  .catch((error) => {
+    console.error("Camera error:", error);
+    addStatus(statusHolder, `Camera Error: ${error.message}`, false);
+  });
 
 const SPEECH = new SpeechSynthesisUtterance();
 SPEECH.lang = SPEECH_LANG;
