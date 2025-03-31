@@ -12,12 +12,7 @@
     --elementText: var(--backgroundText);
     --hoverColor: royalblue;
 }
-/* DEBUGGING LINE */
-/*
-* {
-    outline: 1px solid green;
-    background-color: rgba(60, 255, 0, 0.15);
-} */
+
 html, body {
     background-color: var(--backgroundColor);
     color: var(--backgroundText);
